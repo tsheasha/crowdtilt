@@ -2,6 +2,6 @@
 task :before_deploy => :environment do
  
 puts "-----> running rspec unit tests"
-system("rake rspec") ? true : fail
+system("rake spec") ? true : fail
 puts "-----> done"
 end
