@@ -20,6 +20,8 @@ gem 'twitter',   '~> 5.9.0'
 #gem 'capistrano-rails', group: :production
 group :development do
     gem 'heroku_san'
+    #Automated tests for the rails app
+    gem 'capybara'
     gem 'selenium-webdriver'
     gem 'sqlite3'
   end
