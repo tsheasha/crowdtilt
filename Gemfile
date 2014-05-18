@@ -16,8 +16,11 @@ gem 'turbolinks'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 #Twitter Gem by sferik
 gem 'twitter',   '~> 5.9.0'
-# Use Capistrano for deployment
-gem 'capistrano-rails', group: :development
+# Use Capistrano for deployment NOT used since not supported by Heroku
+#gem 'capistrano-rails', group: :production
+group :development do
+    gem 'heroku_san'
+  end
 #serve static files heroku
 gem 'rails_12factor', group: :production
 #unicorn server for production
