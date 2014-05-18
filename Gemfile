@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'sqlite3'
+gem 'pg'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use SCSS for stylesheets
@@ -22,3 +22,5 @@ gem 'capistrano-rails', group: :development
 gem 'rails_12factor', group: :production
 #unicorn server for production
 gem 'unicorn'
+
+ruby "2.1.2"
