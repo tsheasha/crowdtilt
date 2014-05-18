@@ -38,7 +38,14 @@
             data: valuesToSubmit
         }).success(function(json){
             json = JSON.parse(json[0]);
-            $('#friendsResults').html('');            
+            $('#friendsResults').html('');
+            if(json.length == 0){
+                $('#common_friends p').html('The requested users do not have any common friends.');
+            }
+            else {
+               $('#common_friends p').html('Get the common friends of two Twitter users.');
+
+            }
             for(var friendCounter = 0; friendCounter < json.length; friendCounter++){
                 $('#friendsResults').append('<div id="singletonFriend"> <a href="https://twitter.com/' + json[friendCounter].screen_name + '">' + json[friendCounter].name + '</a><img class="avatar" src="' + json[friendCounter].profile_image_url + '"/> </div>');
             }
@@ -54,7 +61,14 @@
         }).success(function(json){
             json = JSON.parse(json[0]);
             resultHTML = "";
-            $('#tweetResults').html('');                        
+            $('#tweetResults').html('');
+            
+            if(json.length == 0){
+                $('#recent_tweets p').html('The requested user has not tweeted lately.');
+            } else {
+               $('#recent_tweets p').html('Get the recent tweets of a Twitter user.');
+  
+            }                      
             for(var tweetCounter = 0; tweetCounter < json.length; tweetCounter++){
                 $('#tweetResults').append('<div id="singletonTweet"><p>' + json[tweetCounter].text + '</p></div> <hr><hr>');
             }

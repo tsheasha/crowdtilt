@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'sqlite3'#'pg'
+gem 'sqlite3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use SCSS for stylesheets
@@ -20,9 +20,14 @@ gem 'twitter',   '~> 5.9.0'
 #gem 'capistrano-rails', group: :production
 group :development do
     gem 'heroku_san'
+    gem 'selenium-webdriver'
+    gem 'sqlite3'
   end
-#serve static files heroku
-gem 'rails_12factor', group: :production
+group :production do
+    #serve static files heroku
+    gem 'rails_12factor'
+    gem 'pg'
+end
 #unicorn server for production
 gem 'unicorn'
 #RSpec testing for Rails
