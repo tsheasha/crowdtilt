@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'pg'
+gem 'sqlite3'#'pg'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use SCSS for stylesheets
@@ -25,5 +25,9 @@ group :development do
 gem 'rails_12factor', group: :production
 #unicorn server for production
 gem 'unicorn'
-
+#RSpec testing for Rails
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0.beta'
+end
+#Ruby version
 ruby "2.1.2"
