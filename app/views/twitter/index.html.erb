@@ -37,9 +37,9 @@
             type: "GET", 
             data: valuesToSubmit
         }).success(function(json){
-            json = JSON.parse(json[0]);            
+            json = JSON.parse(json[0]);
+            $('#friendsResults').html('');            
             for(var friendCounter = 0; friendCounter < json.length; friendCounter++){
-                console.log(json[friendCounter].name);
                 $('#friendsResults').append('<div id="singletonFriend"> <a href="https://twitter.com/' + json[friendCounter].screen_name + '">' + json[friendCounter].name + '</a><img class="avatar" src="' + json[friendCounter].profile_image_url + '"/> </div>');
             }
         });
@@ -54,6 +54,7 @@
         }).success(function(json){
             json = JSON.parse(json[0]);
             resultHTML = "";
+            $('#tweetResults').html('');                        
             for(var tweetCounter = 0; tweetCounter < json.length; tweetCounter++){
                 $('#tweetResults').append('<div id="singletonTweet"><p>' + json[tweetCounter].text + '</p></div> <hr><hr>');
             }
