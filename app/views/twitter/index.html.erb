@@ -1,0 +1,62 @@
+<div id="landing">
+    <div id = "leftHalf">
+        <div id="common_friends" class="landing form section"><a name="common"></a>
+                <input id="first_username" type="text" name="first_user" placeholder="1st Handle" value="">
+                <input id="second_username" type="text" name="second_user" placeholder="2nd Handle" value="">
+
+                <button id="commonFriendsButton">Get Common Friends</button> 
+            <p>		
+                Get the common friends of two Twitter users.	
+            </p>
+        </div>
+        <div id="friendsResults">
+        </div>
+    </div>
+  
+    <div id="rightHalf">
+        <div id="recent_tweets" class="landing form section"><a name="common"></a>
+                <input id="username" type="text" name="username" placeholder="Handle" value="">
+
+                <button id="tweetButton">Get Recent Tweets</button> 
+            <p>		
+                Get the recent tweets of a Twitter user.	
+            </p>
+        </div>
+        <div id="tweetResults">
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var shit = "shit";
+    $('#commonFriendsButton').click(function() { 
+        var valuesToSubmit = 'first_user=' + $('#first_username').val() +
+                             '&second_user=' + $('#second_username').val() ;
+        $.ajax({
+            url: "/twitter/common_friends",
+            type: "GET", 
+            data: valuesToSubmit
+        }).success(function(json){
+            json = JSON.parse(json[0]);            
+            for(var friendCounter = 0; friendCounter < json.length; friendCounter++){
+                console.log(json[friendCounter].name);
+                $('#friendsResults').append('<div id="singletonFriend"> <a href="https://twitter.com/' + json[friendCounter].screen_name + '">' + json[friendCounter].name + '</a><img class="avatar" src="' + json[friendCounter].profile_image_url + '"/> </div>');
+            }
+        });
+    });
+
+    $('#tweetButton').click(function() {
+        var valuesToSubmit = 'username=' + $('#username').val();
+        $.ajax({
+            url: "/twitter/tweets", 
+            type: "GET", 
+            data: valuesToSubmit
+        }).success(function(json){
+            json = JSON.parse(json[0]);
+            resultHTML = "";
+            for(var tweetCounter = 0; tweetCounter < json.length; tweetCounter++){
+                $('#tweetResults').append('<div id="singletonTweet"><p>' + json[tweetCounter].text + '</p></div> <hr><hr>');
+            }
+        });
+    });
+</script>
