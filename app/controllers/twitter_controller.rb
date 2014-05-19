@@ -4,6 +4,8 @@ class TwitterController < ApplicationController
      @tweets = TwitterProxy.recent_tweets(user)
      tweets_json = @tweets.map{|x| x.attrs.select{|key, value| [:text].include?(key)}}
      render json: [tweets_json.to_json]
+  rescue
+     render json: []
   end
 
   def common_friends
@@ -12,6 +14,8 @@ class TwitterController < ApplicationController
      @users = TwitterProxy.get_friend_intersection(first_user, second_user)
      users_json = @users.map{|x| x.attrs.select{|key, value| [:name,:screen_name,:profile_image_url].include?(key)}}
      render json: [users_json.to_json]
+  rescue
+     render json: []
   end
 
   def index 

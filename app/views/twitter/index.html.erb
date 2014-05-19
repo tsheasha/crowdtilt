@@ -41,18 +41,21 @@
             type: "GET", 
             data: valuesToSubmit
         }).success(function(json){
-            json = JSON.parse(json[0]);
-            $('#friendsResults').html('');
-            if(json.length == 0){
+            if(json.length > 0) {
+                json = JSON.parse(json[0]);
+                $('#friendsResults').html('');
+                $('#common_friends p').html('Get the common friends of two Twitter users.');
+                for(var friendCounter = 0; friendCounter < json.length; friendCounter++){
+                    $('#friendsResults').append('<div id="singletonFriend"> <a href="https://twitter.com/' + json[friendCounter].screen_name + '">' + json[friendCounter].name + '</a><img class="avatar" src="' + json[friendCounter].profile_image_url + '"/> </div>');
+                }
+            } else {
+                $('#friendsResults').html('');            
                 $('#common_friends p').html('The requested users do not have any common friends.');
-            }
-            else {
-               $('#common_friends p').html('Get the common friends of two Twitter users.');
 
             }
-            for(var friendCounter = 0; friendCounter < json.length; friendCounter++){
-                $('#friendsResults').append('<div id="singletonFriend"> <a href="https://twitter.com/' + json[friendCounter].screen_name + '">' + json[friendCounter].name + '</a><img class="avatar" src="' + json[friendCounter].profile_image_url + '"/> </div>');
-            }
+        }).fail(function(json){
+                $('#friendsResults').html('');            
+                $('#common_friends p').html('The requested users do not have any common friends.');
         });
     });
 
@@ -63,19 +66,24 @@
             type: "GET", 
             data: valuesToSubmit
         }).success(function(json){
-            json = JSON.parse(json[0]);
-            resultHTML = "";
-            $('#tweetResults').html('');
-            
-            if(json.length == 0){
-                $('#recent_tweets p').html('The requested user has not tweeted lately.');
+            if(json.length > 0){
+                json = JSON.parse(json[0]);
+                resultHTML = "";
+                $('#tweetResults').html('');
+                
+                $('#recent_tweets p').html('Get the recent tweets of a Twitter user.');
+      
+                for(var tweetCounter = 0; tweetCounter < json.length; tweetCounter++){
+                    $('#tweetResults').append('<div id="singletonTweet"><p>' + json[tweetCounter].text + '</p></div> <hr>');
+                }
             } else {
-               $('#recent_tweets p').html('Get the recent tweets of a Twitter user.');
-  
-            }                      
-            for(var tweetCounter = 0; tweetCounter < json.length; tweetCounter++){
-                $('#tweetResults').append('<div id="singletonTweet"><p>' + json[tweetCounter].text + '</p></div> <hr><hr>');
+                $('#tweetResults').html('');                
+                $('#recent_tweets p').html('The requested user has not tweeted lately.');
+
             }
+        }).fail(function(json){
+                $('#tweetResults').html('');        
+                $('#recent_tweets p').html('The requested user has not tweeted lately.');
         });
     });
 </script>

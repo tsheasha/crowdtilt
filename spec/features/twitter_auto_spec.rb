@@ -14,9 +14,9 @@ describe "access Twitter API and get correct response", :js => true do
     visit '/'
     within("#common_friends") do
       fill_in 'first_username', :with => 'yahiaelgamal'
-      fill_in 'second_username', :with => 'TarekSheasha'
+      fill_in 'second_username', :with => 'TarekSheashaaa'
     end
-    click_button 'Get Empty message'
+    click_button 'Get Common Friends'
     expect(page).to have_content 'The requested users do not have any common friends.'
   end
 
@@ -34,7 +34,7 @@ describe "access Twitter API and get correct response", :js => true do
     within("#recent_tweets") do
       fill_in 'username', :with => 'TarekSheashaTarekSheasha'
     end
-    click_button 'Get Empty message for recent tweets'
+    click_button 'Get Recent Tweets'
     expect(page).to have_content 'The requested user has not tweeted lately.'
   end
 end
