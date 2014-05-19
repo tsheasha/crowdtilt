@@ -32,16 +32,23 @@
 </div>
 
 <script type="text/javascript">
-    var shit = "shit";
+    
+    //Action performed when the Get Common friends button is clicked
     $('#commonFriendsButton').click(function() { 
         var valuesToSubmit = 'first_user=' + $('#first_username').val() +
                              '&second_user=' + $('#second_username').val() ;
+        
+        //AJAX call that either appends the common friends to the friendsResults div
+        //or changes the value of the <p> tag within the div to indicate the intersection
+        //of friends is empty.
         $.ajax({
             url: "/twitter/common_friends",
             type: "GET", 
             data: valuesToSubmit
         }).success(function(json){
+            //Intersection exists.
             if(json.length > 0) {
+
                 json = JSON.parse(json[0]);
                 $('#friendsResults').html('');
                 $('#common_friends p').html('Get the common friends of two Twitter users.');
@@ -49,6 +56,7 @@
                     $('#friendsResults').append('<div id="singletonFriend"> <a href="https://twitter.com/' + json[friendCounter].screen_name + '">' + json[friendCounter].name + '</a><img class="avatar" src="' + json[friendCounter].profile_image_url + '"/> </div>');
                 }
             } else {
+                //Intersection is empty.
                 $('#friendsResults').html('');            
                 $('#common_friends p').html('The requested users do not have any common friends.');
 
@@ -59,13 +67,19 @@
         });
     });
 
+    //Action performed when Get Recent tweets button is clicked.
     $('#tweetButton').click(function() {
         var valuesToSubmit = 'username=' + $('#username').val();
+        
+        //AJAX call that either appends the recent tweets to the tweetResults div
+        //or changes the value of the <p> tag within the div to indicate there are not
+        //recent tweets
         $.ajax({
             url: "/twitter/tweets", 
             type: "GET", 
             data: valuesToSubmit
         }).success(function(json){
+            //There exist recent tweets
             if(json.length > 0){
                 json = JSON.parse(json[0]);
                 resultHTML = "";
@@ -77,6 +91,7 @@
                     $('#tweetResults').append('<div id="singletonTweet"><p>' + json[tweetCounter].text + '</p></div> <hr>');
                 }
             } else {
+                //There exist no recent tweets
                 $('#tweetResults').html('');                
                 $('#recent_tweets p').html('The requested user has not tweeted lately.');
 

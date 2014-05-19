@@ -41,5 +41,5 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
-
+#Increasing default wait time for Capybara to accomodate AJAX Twitter API Calls
 Capybara.default_wait_time = 15
